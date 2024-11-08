@@ -87,8 +87,21 @@ void Deck::fillFromFile(const std::string& inputFile)
     while (std::getline(inFile, front, '<'))
     {
         std::getline(inFile, back, '>');
+
+        std::string stripFront = "";
+        std::string stripBack = "";
+        for (char c: front)
+        {
+            if (isalnum(c))
+            stripFront += c;
+        }
+        for (char c: back)
+        {
+            if (isalnum(c))
+            stripBack += c;
+        }
         
-        Card tempCard(front, back);
+        Card tempCard(stripFront, stripBack);
         deck.push_back(tempCard);
     }
 }
